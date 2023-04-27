@@ -46,38 +46,37 @@
         <input type="submit" value="排序" name="sort" id="sort">
         <input type="submit" value="更新" name="update" id="update">
     </form>
-    <<<<<<< HEAD=======<a href="/">回首頁</a>
-        >>>>>>> database
-        {% if not columns %}
-        <h3 style="color: red;">資料忙碌中,請稍後在試</h3>
-        {% else %}
-        <table border="1">
-            <thead>
-                <tr>
-                    {% for column in columns %}
-                    <th>{{column}}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for value in values %}
-                <tr>
-                    {% for data in value %}
-                    <td>{{data}}</td>
-                    {% endfor %}
-                </tr>
+    <a href="/">回首頁</a>
+    {% if not columns %}
+    <h3 style="color: red;">資料忙碌中,請稍後在試</h3>
+    {% else %}
+    <table border="1">
+        <thead>
+            <tr>
+                {% for column in columns %}
+                <th>{{column}}</th>
                 {% endfor %}
-            </tbody>
+            </tr>
+        </thead>
+        <tbody>
+            {% for value in values %}
+            <tr>
+                {% for data in value %}
+                <td>{{data}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
 
-        </table>
-        {% endif %}
-        <script src="../static/pm25.js"></script>
-        <<<<<<< HEAD=======<script>
-            // document.querySelector("h1").innerText = "javascript";
-            // $("h1").text("JQery!");
-            // $("h1").css('color', 'red');
-            </script>
-            >>>>>>> database
+    </table>
+    {% endif %}
+    <script src="../static/pm25.js"></script>
+    <<<<<<< HEAD=======<script>
+        // document.querySelector("h1").innerText = "javascript";
+        // $("h1").text("JQery!");
+        // $("h1").css('color', 'red');
+        </script>
+        >>>>>>> database
 </body>
 
 </html>
