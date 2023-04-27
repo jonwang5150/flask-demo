@@ -1,14 +1,33 @@
 import requests
 import sqlite3
+import pandas as pd
+
+
+columns, values = None, None
+
+
+def get_six_pm25():
+    global values, columns
+    if values is None:
+        get_pm25_db()
+    six_pm25 = {}
+    six_countys = ['臺北市', '新北市', '桃園市', '臺中市', '臺南市', '高雄市']
+
+    df = pd.DataFrame(values, columns=columns)
+    for county in six_countys:
+        six_pm25[county] = round(df.groupby('county').get_group(county)[
+                                 'pm25'].astype(int).mean(), 1)
+
+    return six_pm25
 
 
 def get_pm25_db(sort=False):
-    columns, values = None, None
+    global columns, values
     try:
         conn = sqlite3.connect('./pm25.db')
         cursor = conn.cursor()
         # 組合標題
-        columns = ['站點名稱', '縣市', 'PM25', '更新時間']
+        columns = ['site', 'county', 'pm25', 'update']
         # 組合內容
        # values = list(cursor.execute(
        #     'select site,county,pm25,datacreationdate from data'))
@@ -31,7 +50,7 @@ def get_pm25_db(sort=False):
 
 
 def get_pm25(sort=False):
-    columns, values = None, None
+    global columns, values
     try:
         url = "https://data.epa.gov.tw/api/v2/aqx_p_02?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=datacreationdate%20desc&format=JSON"
         resp = requests.get(url)
