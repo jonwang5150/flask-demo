@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    background-color: rgb(245, 229, 208);
+}
+
+li {
+    width: 200px;
+    display: inline-block;
+    padding: 12px;
+    margin: 6px;
+    color: chocolate;
+    border-radius: 6px;
+    list-style-type: none;
+    background-color: gold;
+}
+
+.banner {
+    background-color: cadetblue;
+    padding: 12px;
+    color: white;
+<<<<<<< HEAD
+}
+
+table {
+    width: 600px;
+    margin: 0 auto;
+    background-color: aqua;
+}
+
+th {
+    font-size: 24px;
+    background-color: black;
+    color: white;
+}
+
+td {
+    background-color: blueviolet;
+}
+
+#sort {
+    background-color: aqua;
+=======
+>>>>>>> database
+}
