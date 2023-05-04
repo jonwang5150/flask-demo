@@ -4,15 +4,23 @@ import pandas as pd
 
 
 columns, values = None, None
+df = None
+
+
+def get_county_pm25(county):
+    datas = df.groupby('county').get_group(county)[
+        ['site', 'pm25']].values.tolist()
+
+    return datas
 
 
 def get_six_pm25():
-    global values, columns
-    if values is None:
-        get_pm25_db()
+    global values, columns, df
     six_pm25 = {}
-    six_countys = ['臺北市', '新北市', '桃園市', '臺中市', '臺南市', '高雄市']
+    if values is None or columns is None:
+        get_pm25_db()
 
+    six_countys = ['臺北市', '新北市', '桃園市', '臺中市', '臺南市', '高雄市']
     df = pd.DataFrame(values, columns=columns)
     for county in six_countys:
         six_pm25[county] = round(df.groupby('county').get_group(county)[
@@ -27,7 +35,7 @@ def get_pm25_db(sort=False):
         conn = sqlite3.connect('./pm25.db')
         cursor = conn.cursor()
         # 組合標題
-        columns = ['site', 'county', 'pm25', 'update']
+        columns = ['site', 'county', 'pm25', 'updatetime']
         # 組合內容
        # values = list(cursor.execute(
        #     'select site,county,pm25,datacreationdate from data'))
@@ -74,4 +82,4 @@ def get_pm25(sort=False):
 
 
 if __name__ == '__main__':
-    print(get_pm25())
+    print(get_county_pm25('新北市'))
